@@ -12,6 +12,7 @@ import interestTheme from './theme';
 import Account from './components/account';
 import Home from './components/home';
 import Header from './components/header';
+import Landing from './components/landing';
 
 import {
   CONNECTION_CONNECTED,
@@ -36,17 +37,17 @@ export default function App() {
         dispatcher.dispatch({ type: GET_BALANCES_PERPETUAL, content: {} })
       }, 5000)
     }
-  
+
     const configureReturned = () => {
       //dispatcher.dispatch({ type: GET_BALANCES_PERPETUAL, content: {} })
     }
-  
+
     const connectionConnected = () => {
       setAccount(store.getStore('account'))
       dispatcher.dispatch({ type: CONFIGURE, content: {} })
       dispatcher.dispatch({ type: GET_BALANCES_PERPETUAL, content: {} })
     };
-  
+
     const connectionDisconnected = () => {
       setAccount(store.getStore('account'))
     }
@@ -65,10 +66,10 @@ export default function App() {
   }, [])
 
   return (
-    <MuiThemeProvider theme={ createMuiTheme(interestTheme) }>
+    <MuiThemeProvider theme={createMuiTheme(interestTheme)}>
       <CssBaseline />
       <IpfsRouter>
-        { !account &&
+        {!account &&
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -81,7 +82,7 @@ export default function App() {
             <Account />
           </div>
         }
-        { account &&
+        {account &&
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -91,13 +92,16 @@ export default function App() {
             background: "#f9fafb"
           }}>
             <Switch>
-              <Route path="/">
+              <Route path="/home">
                 <Home />
+              </Route>
+              <Route path="/">
+                <Landing />
               </Route>
             </Switch>
           </div>
         }
-        { account && <Header /> }
+        {account && <Header />}
       </IpfsRouter>
     </MuiThemeProvider>
   )
