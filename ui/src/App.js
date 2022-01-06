@@ -6,13 +6,14 @@ import {
   Route
 } from "react-router-dom";
 import IpfsRouter from 'ipfs-react-router'
+// import { colors } from './theme'
 
 import interestTheme from './theme';
 
-import Account from './components/account';
-import Home from './components/home';
-import Header from './components/header';
+// import Account from './components/account';
+import Faucet from './components/faucet';
 import Landing from './components/landing';
+import ResponsiveAppBar from './components/appbar';
 
 import {
   CONNECTION_CONNECTED,
@@ -24,12 +25,13 @@ import {
 } from './constants'
 
 import Store from "./stores";
+import SimplePaper from './components/calculator';
 const emitter = Store.emitter
 const dispatcher = Store.dispatcher
-const store = Store.store
+// const store = Store.store
 
 export default function App() {
-  const [account, setAccount] = useState(null)
+  // const [account, setAccount] = useState(null)
 
   useEffect(() => {
     const getBalancesReturned = () => {
@@ -43,13 +45,13 @@ export default function App() {
     }
 
     const connectionConnected = () => {
-      setAccount(store.getStore('account'))
+      // setAccount(store.getStore('account'))
       dispatcher.dispatch({ type: CONFIGURE, content: {} })
       dispatcher.dispatch({ type: GET_BALANCES_PERPETUAL, content: {} })
     };
 
     const connectionDisconnected = () => {
-      setAccount(store.getStore('account'))
+      // setAccount(store.getStore('account'))
     }
 
     emitter.on(CONNECTION_CONNECTED, connectionConnected)
@@ -69,7 +71,7 @@ export default function App() {
     <MuiThemeProvider theme={createMuiTheme(interestTheme)}>
       <CssBaseline />
       <IpfsRouter>
-        {!account &&
+        {/* {!account &&
           <div style={{
             display: 'flex',
             flexDirection: 'column',
@@ -81,27 +83,38 @@ export default function App() {
           }}>
             <Account />
           </div>
-        }
-        {account &&
+        } */}
+        <div>
           <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: '100vh',
-            justifyContent: 'center',
-            alignItems: 'center',
-            background: "#f9fafb"
+            minWidth: '100vw',
+          }}>
+            <ResponsiveAppBar />
+          </div>
+          <div style={{
+            // paddingLeft: '10px',
+            // backgroundColor: colors.compoundGreen
           }}>
             <Switch>
-              <Route path="/home">
-                <Home />
-              </Route>
-              <Route path="/">
+              <Route path="/landing">
                 <Landing />
+              </Route>
+              <Route path="/contract">
+                <SimplePaper />
+              </Route>
+              <Route path="/account">
+                <SimplePaper />
+              </Route><Route path="/calculator">
+                <SimplePaper />
+              </Route><Route path="/howtobuy">
+                <SimplePaper />
+              </Route>
+              <Route path="/faucet">
+                <Faucet />
               </Route>
             </Switch>
           </div>
-        }
-        {account && <Header />}
+        </div>
+        {/* {account && <Header />} */}
       </IpfsRouter>
     </MuiThemeProvider>
   )

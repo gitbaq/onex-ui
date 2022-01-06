@@ -8,8 +8,10 @@ import {
 import { transparentize } from 'polished'
 
 import { colors } from '../../theme'
+import './account.css'
 
-import harmonyLogo from '../../assets/harmony.png';
+// import harmonyLogo from '../../assets/harmony.png';
+import oneXLogo from '../../assets/OneX.jpeg'
 
 import UnlockModal from '../unlock/unlockModal.jsx'
 
@@ -74,7 +76,7 @@ const useStyles = makeStyles(theme => ({
   },
   disclaimer: {
     padding: '12px',
-    border: '1px solid '+colors.white,
+    border: '1px solid ' + colors.white,
     borderRadius: '0.75rem',
     marginBottom: '24px',
     fontWeight: 1,
@@ -89,19 +91,19 @@ export default function Account() {
 
   const renderNotConnected = () => {
     return (
-      <div className={ classes.notConnectedRoot }>
-        <div className={ classes.connectHeading }>
-          <Typography variant='h2'>Token faucet demo dApp on Harmony</Typography>
-          <img alt='Harmony logo' src={harmonyLogo} />
+      <div className={classes.notConnectedRoot}>
+        <div className={classes.connectHeading}>
+          <Typography variant='h2'>OneX Facuet App</Typography>
+          <img alt='OneX logo' src={oneXLogo} className="logo" />
         </div>
         <Button
-          className={ classes.actionButton }
+          className={classes.actionButton}
           color="primary"
           onClick={connectClicked}
-          >
+        >
           <Typography>Connect your wallet</Typography>
         </Button>
-        { modalOpen && renderModal() }
+        {modalOpen && renderModal()}
       </div>
     )
   }
@@ -116,13 +118,13 @@ export default function Account() {
 
   const renderModal = () => {
     return (
-      <UnlockModal closeModal={ closeModal } modalOpen={ modalOpen } />
+      <UnlockModal closeModal={closeModal} modalOpen={modalOpen} />
     )
   }
 
   return (
-    <div className={ classes.root }>
-      { renderNotConnected() }
+    <div className={classes.root}>
+      {renderNotConnected()}
     </div>
   )
 }

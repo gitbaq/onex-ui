@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
   green: {
     backgroundColor: colors.white,
     '&:hover': {
-      backgroundColor: colors.compoundGreen,
+      // backgroundColor: colors.compoundGreen,
       '& .title': {
         color: colors.white,
       },
@@ -104,14 +104,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Home() {
+export default function Faucet() {
   const classes = useStyles();
   const [snackbarMessage, setSnackbarMessage] = useState(null)
   const [snackbarType, setSnackbarType] = useState(null)
   const [loading, setLoading] = useState(false)
 
   const renderSnackbar = () => {
-    return <Snackbar type={ snackbarType } message={ snackbarMessage } open={true}/>
+    return <Snackbar type={snackbarType} message={snackbarMessage} open={true} />
   }
 
   const faucet = async () => {
@@ -119,12 +119,12 @@ export default function Home() {
       setSnackbarMessage(null)
       setSnackbarType(null)
       setLoading(true)
-  
+
       const hmy = store.getStore('hmy')
-      
+
       try {
         const res = await store.useFaucet()
-  
+
         if (res.status === 'called' || res.status === 'call') {
           const url = `${hmy.explorerUrl}/tx/${res.transaction.receipt.transactionHash}`
           setSnackbarMessage(url)
@@ -141,7 +141,7 @@ export default function Home() {
         } else {
           setSnackbarMessage("An error occurred :(. Please try again!")
         }
-  
+
         setSnackbarType("Error")
         setLoading(false)
       }
@@ -149,14 +149,14 @@ export default function Home() {
   }
 
   return (
-    <div className={ classes.root }>
-      <Card className={ `${classes.card} ${classes.gradient}` } onClick={ () => faucet() }>
-        <AttachMoneyIcon className={ `${classes.icon} icon` } />
-        <Typography variant={'h3'} className={ `${classes.title} title` }>Faucet</Typography>
-        <Typography variant={'h6'} className={ `${classes.subTitle} title` }>(Click to request funds)</Typography>
+    <div className={classes.root}>
+      <Card className={`${classes.card} ${classes.gradient}`} onClick={() => faucet()}>
+        <AttachMoneyIcon className={`${classes.icon} icon`} />
+        <Typography variant={'h3'} className={`${classes.title} title`}>Faucet</Typography>
+        <Typography variant={'h6'} className={`${classes.subTitle} title`}>(Click to request funds)</Typography>
       </Card>
-      { loading && <ColoredLoader /> }
-      { snackbarMessage && renderSnackbar() }
+      {loading && <ColoredLoader />}
+      {snackbarMessage && renderSnackbar()}
     </div>
   )
 }

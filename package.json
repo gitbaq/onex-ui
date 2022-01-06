@@ -1,5 +1,5 @@
 {
-  "name": "OneX Token",
+  "name": "onex-token",
   "version": "1.0.0",
   "description": "A sample faucet dApp awarding users with a HRC-20 test token",
   "license": "GPL-3.0-or-later",

@@ -20,10 +20,11 @@ const emitter = Store.emitter
 
 const useStyles = makeStyles(theme => ({
   headerContainer: {
-    position: 'absolute',
-    top: '12px',
-    right: '12px',
-    zIndex: 999,
+    // position: 'absolute',
+    // top: '12px',
+    // right: '12px',
+
+    // zIndex: 999,
     display: 'flex',
   },
   actionButton: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   gradient: {
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     '&:hover': {
       backgroundColor: '#00AEE9',
       '& .title': {
@@ -86,14 +87,14 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     cursor: 'pointer',
     '&:hover': {
-      border: "2px solid "+colors.borderBlue,
+      border: "2px solid " + colors.borderBlue,
       background: 'rgba(47, 128, 237, 0.1)'
     },
     [theme.breakpoints.down('sm')]: {
       display: 'flex',
       position: 'absolute',
       transform: 'translate(0, 200%)',
-      border: "1px solid "+colors.borderBlue,
+      border: "1px solid " + colors.borderBlue,
       background: colors.white
     }
   }
@@ -121,7 +122,7 @@ export default function Header() {
   var address = null;
   if (account.address) {
     address = toBech32(account.address)
-    address = `${address.substring(0,6)}...${address.substring(address.length-4,address.length)}`
+    address = `${address.substring(0, 6)}...${address.substring(address.length - 4, address.length)}`
   }
 
   const addressClicked = () => {
@@ -134,29 +135,29 @@ export default function Header() {
 
   const renderModal = () => {
     return (
-      <UnlockModal closeModal={ closeModal } modalOpen={ modalOpen } />
+      <UnlockModal closeModal={closeModal} modalOpen={modalOpen} />
     )
   }
 
   return (
-    <div className={ classes.headerContainer }>
-      { address &&
+    <div className={classes.headerContainer}>
+      {address &&
         <Balances />
       }
-      <div className={ classes.account }>
-        { address &&
-          <Typography variant={ 'h4'} className={ `${classes.walletAddress} ${classes.gradient}` } noWrap onClick={addressClicked} >
-            { address }
-            <div className={ classes.connectedDot }></div>
+      <div className={classes.account}>
+        {address &&
+          <Typography variant={'h4'} className={`${classes.walletAddress} ${classes.gradient}`} noWrap onClick={addressClicked} >
+            {address}
+            <div className={classes.connectedDot}></div>
           </Typography>
         }
-        { !address &&
-          <Typography variant={ 'h4'} className={ `${classes.walletAddress} ${classes.gradient}` } noWrap onClick={addressClicked} >
+        {!address &&
+          <Typography variant={'h4'} className={`${classes.walletAddress} ${classes.gradient}`} noWrap onClick={addressClicked} >
             Connect your wallet
           </Typography>
         }
       </div>
-      { modalOpen && renderModal() }
+      {modalOpen && renderModal()}
     </div>
   );
 

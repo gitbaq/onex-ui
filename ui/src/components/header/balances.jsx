@@ -17,7 +17,7 @@ const emitter = Store.emitter
 
 const useStyles = makeStyles(theme => ({
   gradient: {
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     '&:hover': {
       backgroundColor: '#00AEE9',
       '& .title': {
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
       }
     },
     '& .title': {
-      color: '#00AEE9',
+      color: '#00AEE9#',
     },
     '& .icon': {
       color: '#00AEE9'
@@ -55,12 +55,12 @@ export default function Balances() {
 
   return (
     <Button
-    className={ classes.gradient }
-    variant="outlined"
-    color="primary"
-    disabled={ true }
+      className={classes.gradient}
+      variant="outlined"
+      color="primary"
+      disabled={true}
     >
-      <Typography>{ tokenBalance } TST</Typography>
+      <Typography>{tokenBalance} OneX</Typography>
     </Button>
   )
 }

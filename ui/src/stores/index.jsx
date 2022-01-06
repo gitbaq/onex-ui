@@ -44,8 +44,8 @@ class Store {
       tokens: [
         {
           address: config.addresses.token,
-          name: 'TestToken',
-          symbol: 'TST',
+          name: 'OneX Token',
+          symbol: 'OneX',
           decimals: 18,
           balance: 0
         }
@@ -78,11 +78,11 @@ class Store {
   }
 
   getStore(index) {
-    return(this.store[index])
+    return (this.store[index])
   }
 
   setStore(obj) {
-    this.store = {...this.store, ...obj}
+    this.store = { ...this.store, ...obj }
     return emitter.emit('StoreUpdated')
   }
 
@@ -110,7 +110,7 @@ class Store {
       async.parallel([
         (callback) => { this.getERC20Balance(hmy, token, account, callback) }
       ], (err, data) => {
-        if(err) {
+        if (err) {
           console.log(err)
           return callback(err)
         }
@@ -119,11 +119,11 @@ class Store {
         callback(null, token)
       })
     }, (err, tokenData) => {
-      if(err) {
+      if (err) {
         console.log(err)
         return emitter.emit(ERROR, err)
       }
-      store.setStore({tokens: tokenData})
+      store.setStore({ tokens: tokenData })
       emitter.emit(GET_BALANCES_PERPETUAL_RETURNED)
       emitter.emit(GET_BALANCES_RETURNED)
     })
@@ -138,7 +138,7 @@ class Store {
       async.parallel([
         (callback) => { this.getERC20Balance(hmy, token, account, callback) }
       ], (err, data) => {
-        if(err) {
+        if (err) {
           console.log(err)
           return callback(err)
         }
@@ -147,11 +147,11 @@ class Store {
         callback(null, token)
       })
     }, (err, tokenData) => {
-      if(err) {
+      if (err) {
         console.log(err)
         return emitter.emit(ERROR, err)
       }
-      store.setStore({tokens: tokenData})
+      store.setStore({ tokens: tokenData })
       emitter.emit(GET_BALANCES_RETURNED)
     })
   }
@@ -162,9 +162,9 @@ class Store {
 
       try {
         var balance = await erc20Contract.methods.balanceOf(account.address).call(hmy.gasOptions())
-        balance = parseFloat(balance)/10**token.decimals
+        balance = parseFloat(balance) / 10 ** token.decimals
         callback(null, Math.ceil(balance))
-      } catch(err) {
+      } catch (err) {
         console.log(err)
         return callback(err)
       }
